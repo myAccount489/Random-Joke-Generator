@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke gernate Card</title>
+    <style>
+        body{
+           background: rgb(46, 116, 121); 
+        }
+        #jokeContainer{
+            background: white;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 900px;
+            height: 580px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.4),
+            0 0 20px rgba(0,0,0,0.4);
+            font-family: sans-serif;
+        }
+        button{
+            width: 200px;
+            height: calc(1.33*35px);
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%,-50%) scale(1.4);
+            background: rgb(173, 250, 255);
+            border: 1px solid black;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        h2{
+            width: 70%;
+            margin: auto;
+            left:50%;
+            position: absolute;
+            text-align: center;
+            transform: translate(-50%,-50%);
+            top: 56%;
+        }
+        #emoji{
+            font-size: 7.5rem;
+            position: absolute;
+            left: 32%;
+            top: 6%;
+        }
+        #button:hover{
+           transform: translate(-50%,-50%) scale(1.47); 
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div id="jokeContainer">
+        <span id="emoji">😂😂</span>
+        <h2 id="jokeText"></h2>
+        <button id="button" onclick="location.reload()">Gernate New</button>
+    </div>
+    <script src="https://unpkg.com/sv443-joke-api@0.0.8/web/index.js"></script>
+    <script>
+        var container = document.getElementById('jokeContainer');
+        var jokeText = document.getElementById('jokeText');
+        var button = document.getElementById('button');
+        JokeAPI.getJokes(
+       {jokeType:"single"})
+       .then(res => res.json())
+       .then(data => {
+        displayJoke(data)
+    })
+    function displayJoke(jokeData){
+        jokeText.innerHTML = jokeData.joke;
+        console.log(jokeData.joke)
+    }
+    </script>
+</body>
+
+</html>
